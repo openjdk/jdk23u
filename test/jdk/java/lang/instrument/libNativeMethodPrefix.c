@@ -21,22 +21,19 @@
  * questions.
  */
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
+#include <stdio.h>
+#include "jni.h"
 
-public class ChildProcessAppLauncher {
-    public static void main(String[] args) throws IOException, InterruptedException {
-        if (args.length == 1 && "noexit".equals(args[0])) {
-            var lock = new Object();
-            synchronized (lock) {
-                lock.wait();
-            }
-        } else {
-            var childPath = System.getProperty("jpackage.app-path"); // get the path to the current jpackage app launcher
-            ProcessBuilder processBuilder = new ProcessBuilder(childPath, "noexit"); //ChildProcessAppLauncher acts as third party app
-            Process process = processBuilder.start();
-            System.out.println("Child id=" + process.pid());
-        }
-    }
+JNIEXPORT jlong JNICALL
+Java_NativeMethodPrefixApp_00024Dummy_fooBarNativeMethod(JNIEnv *env, jclass clazz)
+{
+    fprintf(stderr, "native method called\n");
+    return 42;
+}
+
+JNIEXPORT jint JNICALL
+JNI_OnLoad(JavaVM *vm, void *reserved)
+{
+    fprintf(stderr, "native library loaded\n");
+    return JNI_VERSION_1_1; // this native library needs the very basic JNI support
 }
