@@ -171,6 +171,11 @@ public final class PassFailJFrame {
     private static final int COLUMNS = 40;
 
     /**
+     * A gap between windows.
+     */
+    public static final int WINDOW_GAP = 8;
+
+    /**
      * Prefix for the user-provided failure reason.
      */
     private static final String FAILURE_REASON = "Failure Reason:\n";
@@ -927,13 +932,13 @@ public final class PassFailJFrame {
 
         switch (position) {
             case HORIZONTAL:
-                int newX = ((screenSize.width / 2) - frame.getWidth());
+                int newX = (((screenSize.width + WINDOW_GAP) / 2) - frame.getWidth());
                 frame.setLocation((newX + screenInsets.left),
                                   (frame.getY() + screenInsets.top));
                 break;
 
             case VERTICAL:
-                int newY = ((screenSize.height / 2) - frame.getHeight());
+                int newY = (((screenSize.height + WINDOW_GAP) / 2) - frame.getHeight());
                 frame.setLocation((frame.getX() + screenInsets.left),
                                   (newY + screenInsets.top));
                 break;
@@ -981,13 +986,13 @@ public final class PassFailJFrame {
             switch (position) {
                 case HORIZONTAL:
                 case TOP_LEFT_CORNER:
-                    testWindow.setLocation((frame.getX() + frame.getWidth() + 5),
+                    testWindow.setLocation((frame.getX() + frame.getWidth() + WINDOW_GAP),
                                            frame.getY());
                     break;
 
                 case VERTICAL:
                     testWindow.setLocation(frame.getX(),
-                                           (frame.getY() + frame.getHeight() + 5));
+                                           (frame.getY() + frame.getHeight() + WINDOW_GAP));
                     break;
             }
         }
@@ -1290,6 +1295,7 @@ public final class PassFailJFrame {
             return this;
         }
 
+
         /**
          * Adds an implementation of {@link PositionWindows PositionWindows}
          * which the framework will use to position multiple test UI windows.
@@ -1312,6 +1318,77 @@ public final class PassFailJFrame {
             this.positionWindows = positionWindows;
             return this;
         }
+
+        /**
+         * Positions the test UI windows in a row to the right of
+         * the instruction frame. The top of the windows is aligned to
+         * that of the instruction frame.
+         *
+         * @return this builder
+         */
+        public Builder positionTestUIRightRow() {
+            return position(Position.HORIZONTAL)
+                   .positionTestUI(WindowLayouts::rightOneRow);
+        }
+
+        /**
+         * Positions the test UI windows in a column to the right of
+         * the instruction frame. The top of the first window is aligned to
+         * that of the instruction frame.
+         *
+         * @return this builder
+         */
+        public Builder positionTestUIRightColumn() {
+            return position(Position.HORIZONTAL)
+                   .positionTestUI(WindowLayouts::rightOneColumn);
+        }
+
+        /**
+         * Positions the test UI windows in a column to the right of
+         * the instruction frame centering the stack of the windows.
+         *
+         * @return this builder
+         */
+        public Builder positionTestUIRightColumnCentered() {
+            return position(Position.HORIZONTAL)
+                   .positionTestUI(WindowLayouts::rightOneColumnCentered);
+        }
+
+        /**
+         * Positions the test UI windows in a row to the bottom of
+         * the instruction frame. The left of the first window is aligned to
+         * that of the instruction frame.
+         *
+         * @return this builder
+         */
+        public Builder positionTestUIBottomRow() {
+            return position(Position.VERTICAL)
+                   .positionTestUI(WindowLayouts::bottomOneRow);
+        }
+
+        /**
+         * Positions the test UI windows in a row to the bottom of
+         * the instruction frame centering the row of the windows.
+         *
+         * @return this builder
+         */
+        public Builder positionTestUIBottomRowCentered() {
+            return position(Position.VERTICAL)
+                   .positionTestUI(WindowLayouts::bottomOneRowCentered);
+        }
+
+        /**
+         * Positions the test UI windows in a column to the bottom of
+         * the instruction frame. The left of the first window is aligned to
+         * that of the instruction frame.
+         *
+         * @return this builder
+         */
+        public Builder positionTestUIBottomColumn() {
+            return position(Position.VERTICAL)
+                   .positionTestUI(WindowLayouts::bottomOneColumn);
+        }
+
 
         /**
          * Adds a {@code WindowListCreator} which the framework will use
@@ -1414,6 +1491,7 @@ public final class PassFailJFrame {
             this.panelCreator = panelCreator;
             return this;
         }
+
 
         /**
          * Adds a {@code PanelCreator} which the framework will use
