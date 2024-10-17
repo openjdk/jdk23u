@@ -750,7 +750,7 @@ public class AnnotationsOnModules extends ModuleTestBase {
 
         Path modifiedModuleInfo = libClasses.resolve("module-info.class");
         ClassModel cm1 = ClassFile.of().parse(modifiedModuleInfo);
-        byte[] newBytes = ClassFile.of().transformClass(cm1, (builder, element) -> {
+        byte[] newBytes = ClassFile.of().transform(cm1, (builder, element) -> {
             if (element instanceof ModuleAttribute attr) {
                 List<ModuleRequireInfo> requires = new ArrayList<>();
 
