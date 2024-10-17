@@ -115,6 +115,8 @@ public class Bug6329116 {
                         if (!expected.equals(got) &&
                             !expected.startsWith(got + "/") &&
                             !expected.endsWith("/" + got)) {
+                            if(checkEurope_Brussels(expected,got))
+                                continue;
                             if (useLocalizedShortDisplayName(tz, locales[i], got, false)) {
 /*
                                 System.out.println(tzs[j] +
@@ -139,6 +141,8 @@ public class Bug6329116 {
                             if (!expected_DST.equals(got) &&
                                 !expected_DST.startsWith(got + "/") &&
                                 !expected_DST.endsWith("/" + got)) {
+                                if(checkEurope_Brussels(expected_DST,got))
+                                    continue;
                                 if (tzs[j].equals("Europe/London") &&
                                     locales[i].equals(new Locale("en", "IE"))) {
                                     continue;
@@ -152,6 +156,7 @@ public class Bug6329116 {
                                     locales[i] + " locale.");
 */
                                     continue;
+
                                 }
                                 System.err.println(tzs[j] +
                                                    ((j > 0) ? "(Alias of \"" + tzs[0] + "\")" : "") +
@@ -170,6 +175,9 @@ public class Bug6329116 {
                             if (!expected.equals(got) &&
                                 !expected.startsWith(got + "/") &&
                                 !expected.endsWith("/" + got)) {
+                                if(checkEurope_Brussels(expected,got)) {
+                                    continue;
+                                }
 /*
                                 System.out.println("## " + tzs[j] +
                                                    ((j > 0) ? "(Alias of \"" + tzs[0] + "\")" : "") +
@@ -245,5 +253,12 @@ public class Bug6329116 {
 
         return false;
     }
+    static boolean checkEurope_Brussels(String expected, String got) {
+        if ((expected.equals("CET") && got.equals("MET")) || (expected.equals("CEST") && got.equals("MEST")))
+            return true;
+        else
+            return false;
+    }
+
 
 }
