@@ -28,11 +28,7 @@
 # With 2024b, "EST" is now a link to "America/Panama."
 # This change has Java 8+ specification implications in java.time.ZoneId.SHORT_IDS field
 # Solution for jdk24+ to modify the mappings in ZoneId class which requires modification of the spec.
-# For update releases, will not make the same ZoneId changes due to current specification.
-# Mappings in ZoneId changes will be made at later in maintenance release for specific versions with the spec changes
 # Update releases will not make the ZoneId changes due to current specification.
-# This file is created to preserve the behaviour of "EST", "MST", and "HST" and needs to be removed when
-# the spec changes are added in future maintenance release
 
 # Zone	NAME		GMTOFF	RULES/SAVE	FORMAT	[UNTIL]
 Zone    EST              -5:00  -       EST

@@ -51,7 +51,6 @@ public class TestZoneInfo310 {
         String tzfiles = "africa antarctica asia australasia europe northamerica southamerica backward etcetera gmt";
         Path jdk_tzdir = Paths.get(System.getProperty("test.src"), "tzdata_jdk");
         // tz2024b_overridden_zones file is created to preserve the behaviour of "EST", "MST", and "HST" when timezone 2024b changes are applied
-        // and needs to be removed when the spec changes are added in future maintenance release
         String jdk_tzfiles = "jdk11_backward tz2024b_overridden_zones";
         String zidir = TESTDIR + File.separator + "zi";
         File fZidir = new File(zidir);
