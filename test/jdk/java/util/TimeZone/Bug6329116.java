@@ -152,7 +152,6 @@ public class Bug6329116 {
                                     locales[i] + " locale.");
 */
                                     continue;
-
                                 }
                                 System.err.println(tzs[j] +
                                                    ((j > 0) ? "(Alias of \"" + tzs[0] + "\")" : "") +
@@ -171,7 +170,7 @@ public class Bug6329116 {
                             if (!expected.equals(got) &&
                                 !expected.startsWith(got + "/") &&
                                 !expected.endsWith("/" + got)) {
-                                /*
+/*
                                 System.out.println("## " + tzs[j] +
                                                    ((j > 0) ? "(Alias of \"" + tzs[0] + "\")" : "") +
                                                    ": expected: " + expected +
@@ -246,4 +245,5 @@ public class Bug6329116 {
 
         return false;
     }
+
 }
